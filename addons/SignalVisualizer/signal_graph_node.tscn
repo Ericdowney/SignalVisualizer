@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq10iaub18e54"]
+
+[ext_resource type="Script" path="res://addons/SignalVisualizer/signal_graph_node.gd" id="1_ovklj"]
+
+[node name="SignalGraphNode" type="GraphNode"]
+offset_right = 232.0
+offset_bottom = 54.0
+resizable = true
+script = ExtResource("1_ovklj")
+
+[connection signal="resize_request" from="." to="." method="_on_resize_request"]

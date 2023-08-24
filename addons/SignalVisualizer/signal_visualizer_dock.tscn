@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://dppfamjc0ji40"]
+
+[ext_resource type="Script" path="res://addons/SignalVisualizer/signal_visualizer_dock.gd" id="1_tlvoh"]
+[ext_resource type="Texture2D" uid="uid://bw0eerkrk4f43" path="res://addons/SignalVisualizer/icons8-play-50.png" id="2_5goxx"]
+
+[node name="SignalVisualizerDock" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tlvoh")
+button_texture = ExtResource("2_5goxx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+alignment = 2
+
+[node name="ClearNodesButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear Nodes"
+
+[node name="GatherNodesButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gather Nodes"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SignalTree" type="Tree" parent="VBoxContainer/HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+column_titles_visible = true
+
+[node name="Graph" type="GraphEdit" parent="VBoxContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearNodesButton" to="." method="_on_clear_nodes_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/GatherNodesButton" to="." method="_on_gather_nodes_button_pressed"]
+[connection signal="button_clicked" from="VBoxContainer/HSplitContainer/SignalTree" to="." method="_on_signal_tree_button_clicked"]
