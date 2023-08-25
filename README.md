@@ -5,9 +5,9 @@ A plugin for Godot 4.x. SignalVisualizer displays the current scene's signals an
 
 ## Installation
 
-The SignalVisualizer plugin can be installed via Godot's Asset Library or from source.
+The SignalVisualizer plugin can be installed from source.
 
-### Source Installation via Github
+### Installation via Github
 
 1. Download the repo
 2. Copy the `addons/SignalVisualizer` directory to your project's `res://addons/` directory.
