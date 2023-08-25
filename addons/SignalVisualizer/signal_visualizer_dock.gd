@@ -29,19 +29,16 @@ const CONNECTION_TYPE: int = 0
 # |===================================|
 # |===================================|
 
-func _on_clear_nodes_button_pressed():
+func _on_clear_graph_button_pressed():
 	clear()
 
-func _on_gather_nodes_button_pressed():
+func _on_generate_graph_button_pressed():
 	clear()
 	
 	var scene_signal_graph = SignalVisualizerManager.generate_signal_graph()
 	_generate_signal_graph(scene_signal_graph)
 	_generate_tree(scene_signal_graph)
 	graph.arrange_nodes()
-
-func _on_signal_tree_button_clicked(item, column, id, mouse_button_index):
-	print(">>> Tree Button Clicked: ", item)
 
 # Methods
 # |===================================|
