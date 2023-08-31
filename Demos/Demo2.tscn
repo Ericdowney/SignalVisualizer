@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d11aona07vys1"]
+
+[ext_resource type="Script" path="res://Demos/Demo2.gd" id="1_cd0io"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nubk"]
+
+[node name="Demo2" type="Node2D"]
+script = ExtResource("1_cd0io")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4nubk")
+debug_color = Color(0.960784, 0, 0.517647, 0.419608)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
