@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://addons/SignalVisualizer/signal_graph_node.gd" id="1_ovklj"]
 
 [node name="SignalGraphNode" type="GraphNode"]
+custom_minimum_size = Vector2(100, 50)
 offset_right = 232.0
 offset_bottom = 54.0
 resizable = true

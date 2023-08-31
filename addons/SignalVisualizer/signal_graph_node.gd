@@ -19,7 +19,7 @@ var connections: Array = [] :
 
 func _ready():
 	selectable = true
-	resizable = false
+	resizable = true
 	draggable = true
 
 # Signals
@@ -38,7 +38,7 @@ func _on_resize_request(new_minsize):
 func get_next_source_slot(signal_name: String, destination_node_name: String) -> int:
 	var index = 0
 	for child in get_children():
-		if child.text == signal_name + " -> " + destination_node_name:
+		if child.name == "source_" + signal_name + "_" + destination_node_name:
 			return index
 
 		index += 1
@@ -49,7 +49,7 @@ func get_source_slot(signal_name: String, destination_node_name: String) -> int:
 	var index = 0
 	for child in get_children():
 		if child.name.begins_with("source_"):
-			if child.text == signal_name + " -> " + destination_node_name:
+			if child.name == "source_" + signal_name + "_" + destination_node_name:
 				return index
 
 			index += 1
@@ -59,7 +59,7 @@ func get_source_slot(signal_name: String, destination_node_name: String) -> int:
 func get_next_destination_slot(signal_name: String, method_signature: String) -> int:
 	var index = 0
 	for child in get_children():
-		if child.text == signal_name + "::" + method_signature:
+		if child.name == "destination_" + signal_name + "_" + method_signature:
 			return index
 
 		index += 1
@@ -70,7 +70,7 @@ func get_destination_slot(signal_name: String, method_signature: String) -> int:
 	var index = 0
 	for child in get_children():
 		if child.name.begins_with("destination_"):
-			if child.text == signal_name + "::" + method_signature:
+			if child.name == "destination_" + signal_name + "_" + method_signature:
 				return index
 
 			index += 1

@@ -29,6 +29,7 @@ enum ConnectionType { incoming, outgoing }
 # |===================================|
 # |===================================|
 
+
 func generate_signal_graph(is_persistent_only: bool = true) -> SignalGraph:
 	var signal_graph = SignalGraph.new()
 	var all_nodes: Array[Node] = gather_nodes_in_scene()

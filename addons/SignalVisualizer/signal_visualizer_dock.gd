@@ -1,7 +1,10 @@
 @tool
 extends Control
 
+signal open_script(node_name: String, method_signature: String)
+
 var SignalGraphNode = preload("res://addons/SignalVisualizer/signal_graph_node.tscn")
+var GraphNodeItem = preload("res://addons/SignalVisualizer/signal_graph_node_item.tscn")
 
 # Properties
 # |===================================|
@@ -12,8 +15,8 @@ const SOURCE_COLOR: Color = Color.SKY_BLUE
 const DESTINATION_COLOR: Color = Color.CORAL
 const CONNECTION_TYPE: int = 0
 
-@export var button_texture: Texture2D
-
+@onready var arrange_nodes_checkbox: CheckBox = %ArrangeNodesCheckBox
+@onready var signal_details_checkbox: CheckBox = %SignalDetailsCheckBox
 @onready var signal_tree: Tree = %SignalTree
 @onready var graph: GraphEdit = %Graph
 
@@ -38,7 +41,12 @@ func _on_generate_graph_button_pressed():
 	var scene_signal_graph = SignalVisualizerManager.generate_signal_graph()
 	_generate_signal_graph(scene_signal_graph)
 	_generate_tree(scene_signal_graph)
-	graph.arrange_nodes()
+	
+	if arrange_nodes_checkbox.button_pressed:
+		graph.arrange_nodes()
+
+func _on_open_signal_in_script(data: SignalGraphNodeItem.Metadata):
+	open_script.emit(data.node_name, data.method_signature)
 
 # Methods
 # |===================================|
@@ -86,15 +94,17 @@ func _generate_signal_graph(signal_graph: SignalGraph):
 		var source_graph_node: SignalGraphNode = graph_nodes[edge.source_node_name] as SignalGraphNode
 		
 		var source_signal_label = Label.new()
-		source_signal_label.text = source_signal.signal_name + " -> " + edge.destination_node_name
+		source_signal_label.text = _get_source_graph_node_text(source_signal, edge)
 		source_signal_label.name = "source_" + source_signal.signal_name + "_" + edge.destination_node_name
 		
-		var destination_signal_label = Label.new()
-		destination_signal_label.text = source_signal.signal_name + "::" + edge.method_signature
-		destination_signal_label.name = "destination_" + source_signal.signal_name + "_" + edge.method_signature
+		var destination_signal_item = GraphNodeItem.instantiate()
+		destination_signal_item.signal_data = SignalGraphNodeItem.Metadata.new(source_signal.signal_name, edge.method_signature, edge.destination_node_name)
+		destination_signal_item.text = _get_destination_graph_node_text(source_signal, edge)
+		destination_signal_item.name = "destination_" + source_signal.signal_name + "_" + edge.method_signature
+		destination_signal_item.open_script.connect(_on_open_signal_in_script)
 		
 		source_graph_node.add_child(source_signal_label)
-		destination_graph_node.add_child(destination_signal_label)
+		destination_graph_node.add_child(destination_signal_item)
 	
 	for edge in signal_graph.edges:
 		var source_signal = signal_graph.get_source_signal_for_edge(edge)
@@ -107,7 +117,7 @@ func _generate_signal_graph(signal_graph: SignalGraph):
 		source_graph_node.set_slot(next_source_slot, false, CONNECTION_TYPE, Color.BLACK, true, CONNECTION_TYPE, SOURCE_COLOR)
 		destination_graph_node.set_slot(next_destination_slot, true, CONNECTION_TYPE, DESTINATION_COLOR, false, CONNECTION_TYPE, Color.BLACK)
 		
-		var from_port = source_graph_node.get_source_slot(source_signal.signal_name, edge.destination_node_name)#source_graph_node.get_connection_output_slot(next_source_slot)
+		var from_port = source_graph_node.get_source_slot(source_signal.signal_name, edge.destination_node_name)
 		var to_port = destination_graph_node.get_destination_slot(source_signal.signal_name, edge.method_signature)
 		
 		if from_port >= 0 and to_port >= 0:
@@ -139,3 +149,15 @@ func _generate_tree(signal_graph: SignalGraph):
 
 func _get_graph_node_name(name: String) -> String:
 	return "{node_name}_graph_node".format({ "node_name": name })
+
+func _get_source_graph_node_text(source_signal: SignalDescription, edge: SignalConnection) -> String:
+	if signal_details_checkbox.button_pressed:
+		return source_signal.signal_name + " -> " + edge.destination_node_name
+	
+	return source_signal.signal_name
+
+func _get_destination_graph_node_text(source_signal: SignalDescription, edge: SignalConnection) -> String:
+	if signal_details_checkbox.button_pressed:
+		return source_signal.signal_name + "::" + edge.method_signature
+	
+	return edge.method_signature

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2lwtwp6kpwtb"]
+
+[ext_resource type="Script" path="res://addons/SignalVisualizer/signal_graph_node_item.gd" id="1_jrd34"]
+[ext_resource type="Script" path="res://addons/SignalVisualizer/resizable_label.gd" id="2_4wwd5"]
+
+[node name="SignalItem" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(51, 23)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_jrd34")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DescriptionLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("2_4wwd5")
+
+[node name="OpenSignalInScriptButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Open"
+flat = true
+
+[connection signal="pressed" from="HBoxContainer/OpenSignalInScriptButton" to="." method="_on_open_signal_in_script_button_pressed"]

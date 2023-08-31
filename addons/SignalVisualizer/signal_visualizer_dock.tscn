@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://dppfamjc0ji40"]
 
 [ext_resource type="Script" path="res://addons/SignalVisualizer/signal_visualizer_dock.gd" id="1_tlvoh"]
-[ext_resource type="Texture2D" uid="uid://bw0eerkrk4f43" path="res://addons/SignalVisualizer/icons8-play-50.png" id="2_5goxx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae0jg"]
 
 [node name="SignalVisualizerDock" type="Control"]
 clip_contents = true
@@ -13,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tlvoh")
-button_texture = ExtResource("2_5goxx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 clip_contents = true
@@ -30,6 +30,21 @@ clip_contents = true
 custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 2
 alignment = 2
+
+[node name="ArrangeNodesCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Arrange Nodes"
+
+[node name="SignalDetailsCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Signal Details"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ae0jg")
 
 [node name="ClearGraphButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
