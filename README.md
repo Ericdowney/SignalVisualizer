@@ -7,6 +7,13 @@ A plugin for Godot 4.x. SignalVisualizer displays the current scene's signals an
 
 The SignalVisualizer plugin can be installed from source.
 
+### Godot Asset Library Installation
+
+1. In Godot's AssetLib tab, search for SignalVisualizer
+1. Download & Install
+
+[Godot Asset Library: SignalVisualizer](https://godotengine.org/asset-library/asset/2067)
+
 ### Installation via Github
 
 1. Download the repo
@@ -32,6 +39,18 @@ Signal Visualizer will create a signal graph by mapping the signals in the curre
 
 ![Signal Visualizer plugin toolbar. Clear graph and Generate graph buttons.](./images/SignalVisualizerToolbarScreenshot.png)
 
+### Arrange Nodes Toggle
+
+The "Arrange Nodes" toggle enables and disables automatic node arrangement when generating the graph. When enabled, `GraphEdit`'s `arrange_nodes()` function will be called once all graph nodes are generated.
+
+### Signal Details Toggle
+
+The "Signal Details" toggle enables and disables expanded formatting described below. When disabled, only the signal's name and corresponding function will be displayed in the graph nodes connections.
+
+### Opening Signals in Source
+
+The "Open" button that displays next to a signal's connected function will open the corresponding source file at the function's line number.
+
 ### Format
 
 In the signal graph and tree, the format is as follows:
@@ -51,3 +70,11 @@ Signal::Callable Method
 ```
 
 ![GameUI Node Incoming Signals](./images/IncomingSignalScreenshot.png)
+
+### Troubleshooting
+
+If you encounter any of the following issues, please log a bug on the issues tab.
+
+#### Godot Freezes & Crashes
+
+In the event, Godot freezes and crashes when clicking "Generate Graph", please toggle "Arrange Nodes" **off** and try again.
