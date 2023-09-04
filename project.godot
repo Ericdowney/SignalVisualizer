@@ -14,10 +14,6 @@ config/name="SignalVisualizer"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-SignalVisualizerManager="*res://addons/SignalVisualizer/signal_visualizer_manager.gd"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
