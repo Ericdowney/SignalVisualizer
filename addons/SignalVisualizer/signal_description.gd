@@ -19,6 +19,14 @@ var description: String :
 			"signal_name": signal_name,
 		})
 
+var dictionary_representation: Dictionary :
+	get:
+		return {
+			"id": id,
+			"node_name": node_name,
+			"signal_name": signal_name
+		}
+
 # Lifecycle
 # |===================================|
 # |===================================|

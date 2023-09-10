@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbsmvov8u78q"]
+
+[ext_resource type="Script" path="res://addons/SignalDebugger/signal_debugger_panel.gd" id="1_ccpan"]
+[ext_resource type="Texture2D" uid="uid://be3nwoioa311t" path="res://addons/SignalDebugger/Play.svg" id="2_vndq2"]
+[ext_resource type="Texture2D" uid="uid://oo1oq2colx5b" path="res://addons/SignalDebugger/Stop.svg" id="3_3cmia"]
+[ext_resource type="Texture2D" uid="uid://bmnff63evbdhv" path="res://addons/SignalDebugger/Clear.svg" id="3_6fbgt"]
+
+[node name="SignalDebugger" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ccpan")
+start_icon = ExtResource("2_vndq2")
+stop_icon = ExtResource("3_3cmia")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ActionButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Start"
+icon = ExtResource("2_vndq2")
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+icon = ExtResource("3_6fbgt")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SignalTree" type="Tree" parent="VBoxContainer/HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+column_titles_visible = true
+allow_rmb_select = true
+hide_root = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="LogLabel" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.690196, 0.690196, 0.690196, 1)
+bbcode_enabled = true
+scroll_following = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ActionButton" to="." method="_on_action_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]

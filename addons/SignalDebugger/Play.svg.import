@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw0eerkrk4f43"
-path="res://.godot/imported/icons8-play-50.png-9067e50f795a749025d0c12331e6d9d1.ctex"
+uid="uid://be3nwoioa311t"
+path="res://.godot/imported/Play.svg-6f52d1602422772eb266bfc89935dc27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/SignalVisualizer/icons8-play-50.png"
-dest_files=["res://.godot/imported/icons8-play-50.png-9067e50f795a749025d0c12331e6d9d1.ctex"]
+source_file="res://addons/SignalDebugger/Play.svg"
+dest_files=["res://.godot/imported/Play.svg-6f52d1602422772eb266bfc89935dc27.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
