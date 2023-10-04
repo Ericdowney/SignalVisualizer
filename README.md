@@ -3,6 +3,10 @@ A plugin for Godot 4.x. SignalVisualizer displays the current scene's signals an
 
 ![Signal Visualizer plugin running Godot 4.x](./images/SignalVisualizerDemo.png)
 
+## YouTube
+
+[![Signal Visualizer Demo Video](https://img.youtube.com/vi/eCWlVX9pwGU/0.jpg)](https://www.youtube.com/watch?v=eCWlVX9pwGU)
+
 ## Installation
 
 The SignalVisualizer plugin can be installed from source.
