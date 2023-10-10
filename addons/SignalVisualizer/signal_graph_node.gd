@@ -10,7 +10,6 @@ var connections: Array = [] :
 	get: return connections
 	set(new_value):
 		connections = new_value
-#		_update_node()
 
 # Lifecycle
 # |===================================|

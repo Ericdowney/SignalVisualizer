@@ -90,7 +90,8 @@ func clear():
 func _clear_graph_nodes():
 	graph.clear_connections()
 	for child in graph.get_children():
-		child.queue_free()
+		if child is SignalGraphNode:
+			child.queue_free()
 
 func _clear_tree():
 	signal_tree.clear()
