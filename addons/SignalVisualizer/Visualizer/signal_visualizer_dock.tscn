@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dppfamjc0ji40"]
+[gd_scene load_steps=5 format=3 uid="uid://dppfamjc0ji40"]
 
-[ext_resource type="Script" path="res://addons/SignalVisualizer/Visualizer/signal_visualizer_dock.gd" id="1_tlvoh"]
+[ext_resource type="Script" path="res://addons/SignalVisualizer/Visualizer/signal_visualizer_dock.gd" id="1_akar5"]
+[ext_resource type="Texture2D" uid="uid://bmnff63evbdhv" path="res://addons/SignalVisualizer/Clear.svg" id="2_m8bsv"]
+[ext_resource type="Texture2D" uid="uid://bxj8ep08wbnm6" path="res://addons/SignalVisualizer/GraphEdit.svg" id="3_dtmqs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae0jg"]
 
@@ -13,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tlvoh")
+script = ExtResource("1_akar5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 clip_contents = true
@@ -29,6 +31,7 @@ size_flags_horizontal = 3
 clip_contents = true
 custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 2
+theme_override_constants/separation = 8
 alignment = 2
 
 [node name="ArrangeNodesCheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
@@ -49,10 +52,12 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ae0jg")
 [node name="ClearGraphButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Clear Graph"
+icon = ExtResource("2_m8bsv")
 
 [node name="GenerateGraphButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Generate Graph"
+icon = ExtResource("3_dtmqs")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
