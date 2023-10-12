@@ -62,7 +62,7 @@ class ScriptMethodReference:
 # |===================================|
 
 var dock: Control
-var debugger: SignalDebuggerPlugin = SignalDebuggerPlugin.new()
+var debugger: SignalDebuggerPlugin
 
 # Lifecycle
 # |===================================|
@@ -71,11 +71,13 @@ var debugger: SignalDebuggerPlugin = SignalDebuggerPlugin.new()
 
 func _enter_tree():
 	dock = SignalVisualizerDockScene.instantiate()
+	debugger = SignalDebuggerPlugin.new()
 	
 	dock.open_script.connect(_on_open_signal_in_script)
 	add_control_to_bottom_panel(dock, "Signal Visualizer")
 	
 	debugger.start_signal_debugging.connect(_on_debugger_start_signal_debugging)
+	debugger.stop_signal_debugging.connect(_on_debugger_stop_signal_debugging)
 	add_debugger_plugin(debugger)
 	add_autoload_singleton("Signal_Debugger", "res://addons/SignalVisualizer/Debugger/SignalDebugger.gd")
 
@@ -85,7 +87,6 @@ func _exit_tree():
 	
 	remove_debugger_plugin(debugger)
 	remove_autoload_singleton("Signal_Debugger")
-	debugger.free()
 
 # Signals
 # |===================================|

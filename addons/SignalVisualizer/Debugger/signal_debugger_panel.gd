@@ -60,21 +60,23 @@ func disable():
 	action_button.disabled = true
 
 func start():
-	is_started = true
-	action_button.icon = stop_icon
-	start_signal_debugging.emit()
-	log_label.append_text("[color=#B0B0B0]Signal Debugging Started...[/color]")
-	log_label.newline()
-	log_label.newline()
+	if not is_started:
+		is_started = true
+		action_button.icon = stop_icon
+		start_signal_debugging.emit()
+		log_label.append_text("[color=#B0B0B0]Signal Debugging Started...[/color]")
+		log_label.newline()
+		log_label.newline()
 
 func stop():
-	is_started = false
-	action_button.icon = start_icon
-	stop_signal_debugging.emit()
-	log_label.newline()
-	log_label.append_text("[color=#B0B0B0]Signal Debugging Stopped[/color]")
-	log_label.newline()
-	log_label.newline()
+	if is_started:
+		is_started = false
+		action_button.icon = start_icon
+		stop_signal_debugging.emit()
+		log_label.newline()
+		log_label.append_text("[color=#B0B0B0]Signal Debugging Stopped[/color]")
+		log_label.newline()
+		log_label.newline()
 
 func create_tree_from_signals(signals: Array):
 	_signals = signals
