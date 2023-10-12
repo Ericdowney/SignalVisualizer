@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dppfamjc0ji40"]
 
-[ext_resource type="Script" path="res://addons/SignalVisualizer/signal_visualizer_dock.gd" id="1_tlvoh"]
+[ext_resource type="Script" path="res://addons/SignalVisualizer/Visualizer/signal_visualizer_dock.gd" id="1_tlvoh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae0jg"]
 

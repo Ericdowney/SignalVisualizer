@@ -16,8 +16,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Signal_Debugger="*res://addons/SignalDebugger/SignalDebugger.gd"
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalDebugger/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg")
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")

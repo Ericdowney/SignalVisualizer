@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cbsmvov8u78q"]
 
-[ext_resource type="Script" path="res://addons/SignalDebugger/signal_debugger_panel.gd" id="1_ccpan"]
-[ext_resource type="Texture2D" uid="uid://be3nwoioa311t" path="res://addons/SignalDebugger/Play.svg" id="2_vndq2"]
-[ext_resource type="Texture2D" uid="uid://oo1oq2colx5b" path="res://addons/SignalDebugger/Stop.svg" id="3_3cmia"]
-[ext_resource type="Texture2D" uid="uid://bmnff63evbdhv" path="res://addons/SignalDebugger/Clear.svg" id="3_6fbgt"]
+[ext_resource type="Script" path="res://addons/SignalVisualizer/Debugger/signal_debugger_panel.gd" id="1_66cpc"]
+[ext_resource type="Texture2D" uid="uid://be3nwoioa311t" path="res://addons/SignalVisualizer/Play.svg" id="2_2wkuv"]
+[ext_resource type="Texture2D" uid="uid://oo1oq2colx5b" path="res://addons/SignalVisualizer/Stop.svg" id="3_bg5eu"]
+[ext_resource type="Texture2D" uid="uid://bmnff63evbdhv" path="res://addons/SignalVisualizer/Clear.svg" id="4_vg63r"]
 
 [node name="SignalDebugger" type="Control"]
 clip_contents = true
@@ -13,9 +13,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ccpan")
-start_icon = ExtResource("2_vndq2")
-stop_icon = ExtResource("3_3cmia")
+script = ExtResource("1_66cpc")
+start_icon = ExtResource("2_2wkuv")
+stop_icon = ExtResource("3_bg5eu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 clip_contents = true
@@ -36,13 +36,13 @@ unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "Start"
-icon = ExtResource("2_vndq2")
+icon = ExtResource("2_2wkuv")
 
 [node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Clear"
-icon = ExtResource("3_6fbgt")
+icon = ExtResource("4_vg63r")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2

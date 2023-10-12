@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://oo1oq2colx5b"
-path="res://.godot/imported/Stop.svg-789f457b6ea43ae1f99ca68c73541fb7.ctex"
+path="res://.godot/imported/Stop.svg-e085086fb31c334bc2f02ca2bffba522.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/SignalDebugger/Stop.svg"
-dest_files=["res://.godot/imported/Stop.svg-789f457b6ea43ae1f99ca68c73541fb7.ctex"]
+source_file="res://addons/SignalVisualizer/Stop.svg"
+dest_files=["res://.godot/imported/Stop.svg-e085086fb31c334bc2f02ca2bffba522.ctex"]
 
 [params]
 

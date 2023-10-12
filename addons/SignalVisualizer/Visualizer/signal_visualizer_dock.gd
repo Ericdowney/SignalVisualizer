@@ -3,8 +3,8 @@ extends Control
 
 signal open_script(node_name: String, method_signature: String)
 
-var SignalGraphNode = preload("res://addons/SignalVisualizer/signal_graph_node.tscn")
-var GraphNodeItem = preload("res://addons/SignalVisualizer/signal_graph_node_item.tscn")
+var SignalGraphNode = preload("res://addons/SignalVisualizer/Visualizer/signal_graph_node.tscn")
+var GraphNodeItem = preload("res://addons/SignalVisualizer/Visualizer/signal_graph_node_item.tscn")
 
 # Properties
 # |===================================|

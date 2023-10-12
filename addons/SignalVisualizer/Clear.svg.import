@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be3nwoioa311t"
-path="res://.godot/imported/Play.svg-6f52d1602422772eb266bfc89935dc27.ctex"
+uid="uid://bmnff63evbdhv"
+path="res://.godot/imported/Clear.svg-d661617e27b91e3580171e3447fde514.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/SignalDebugger/Play.svg"
-dest_files=["res://.godot/imported/Play.svg-6f52d1602422772eb266bfc89935dc27.ctex"]
+source_file="res://addons/SignalVisualizer/Clear.svg"
+dest_files=["res://.godot/imported/Clear.svg-d661617e27b91e3580171e3447fde514.ctex"]
 
 [params]
 
