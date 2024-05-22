@@ -9,10 +9,10 @@ class SignalDebuggerPlugin extends EditorDebuggerPlugin:
 	
 	var debugger_panel: SignalDebuggerPanel
 	
-	func _has_capture(prefix):
+	func _has_capture(prefix) -> bool:
 		return prefix == "signal_debugger"
 	
-	func _capture(message, data, session_id):
+	func _capture(message, data, session_id) -> bool:
 		if message == "signal_debugger:signal_executed":
 			if data.size() == 3:
 				var time = data[0]
@@ -109,13 +109,11 @@ func _on_open_signal_in_script(node_name: String, method_signature: String):
 
 func _on_debugger_start_signal_debugging():
 	for session in debugger.get_sessions():
-		if session.is_debuggable():
-			session.send_message("signal_debugger:start", [])
+		session.send_message("signal_debugger:start", [])
 
 func _on_debugger_stop_signal_debugging():
 	for session in debugger.get_sessions():
-		if session.is_debuggable():
-			session.send_message("signal_debugger:stop", [])
+		session.send_message("signal_debugger:stop", [])
 
 # Methods
 # |===================================|
