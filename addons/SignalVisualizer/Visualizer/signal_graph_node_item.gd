@@ -18,7 +18,7 @@ class Metadata:
 # |===================================|
 # |===================================|
 
-@onready var label: ResizableLabel = %DescriptionLabel
+@onready var label: Label = %DescriptionLabel
 
 var signal_data: Metadata = null
 

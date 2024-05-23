@@ -1,5 +1,5 @@
 @tool
-class_name ResizableLabel extends Label
+extends Label
 
 # Properties
 # |===================================|

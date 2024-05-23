@@ -7,7 +7,7 @@ class SignalDebuggerPlugin extends EditorDebuggerPlugin:
 	signal start_signal_debugging
 	signal stop_signal_debugging
 	
-	var debugger_panel: SignalDebuggerPanel
+	var debugger_panel
 	
 	func _has_capture(prefix) -> bool:
 		return prefix == "signal_debugger"
