@@ -25,7 +25,31 @@ script = ExtResource("2_5t06s")
 shape = SubResource("CircleShape2D_i0fib")
 debug_color = Color(0.984314, 0, 0.333333, 0.419608)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Demo1Hud" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestButton" type="Button" parent="CanvasLayer/Demo1Hud"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Test Button"
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="button_down" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_button_up"]
+[connection signal="pressed" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_pressed"]
