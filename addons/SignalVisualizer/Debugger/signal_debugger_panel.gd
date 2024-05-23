@@ -24,6 +24,8 @@ var is_started: bool = false :
 		_update_action_button()
 
 var _signals: Array = []
+var _signal_filter: Array = []
+var _is_stack_trace_enabled: bool = false
 
 # Lifecycle
 # |===================================|
@@ -47,6 +49,23 @@ func _on_action_button_pressed():
 func _on_clear_button_pressed():
 	log_label.clear()
 	signal_tree.clear()
+
+func _on_signal_tree_item_selected():
+	# Updates the checkmark button
+	var selected_item = signal_tree.get_selected()
+	var is_checked = selected_item.is_checked(1)
+	selected_item.set_checked(1, (not is_checked))
+	
+	# Add / Remove signal from filters
+	var selected_signal = _signals.filter(func (element): return element.signal_name == selected_item.get_text(0))[0]
+	if _signal_filter.has(selected_signal.signal_name):
+		var selected_index = _signal_filter.find(selected_signal.signal_name)
+		_signal_filter.remove_at(selected_index)
+	else:
+		_signal_filter.append(selected_signal.signal_name)
+
+func _on_stack_trace_button_pressed():
+	_is_stack_trace_enabled = not _is_stack_trace_enabled
 
 # Methods
 # |===================================|
@@ -92,12 +111,21 @@ func create_tree_from_signals(signals: Array):
 		else:
 			node_tree_item = signal_tree.create_item(root)
 			node_tree_item.set_text(0, signal_item.node_name)
+			node_tree_item.set_selectable(0, false)
+			node_tree_item.set_selectable(1, false)
 			tree_items[signal_item.node_name] = node_tree_item
 		
 		var signal_tree_item = signal_tree.create_item(node_tree_item)
 		signal_tree_item.set_text(0, signal_item.signal_name)
+		signal_tree_item.set_cell_mode(1, TreeItem.CELL_MODE_CHECK)
+		signal_tree_item.set_checked(1, true)
+		signal_tree_item.set_selectable(0, false)
+		signal_tree_item.set_selectable(1, true)
 
 func log_signal_execution(time: String, node_name: String, signal_name: String):
+	if _signal_filter != null and _signal_filter.has(signal_name):
+		return
+	
 	if not log_label.text.is_empty():
 		log_label.newline()
 	log_label.append_text(

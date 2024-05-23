@@ -52,7 +52,8 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 2.08165e-12)
 layout_mode = 2
-column_titles_visible = true
+columns = 2
+allow_reselect = true
 allow_rmb_select = true
 hide_root = true
 
@@ -70,3 +71,4 @@ scroll_following = true
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ActionButton" to="." method="_on_action_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="item_selected" from="VBoxContainer/HSplitContainer/SignalTree" to="." method="_on_signal_tree_item_selected"]
