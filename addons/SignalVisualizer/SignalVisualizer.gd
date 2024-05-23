@@ -79,7 +79,9 @@ func _enter_tree():
 	debugger.start_signal_debugging.connect(_on_debugger_start_signal_debugging)
 	debugger.stop_signal_debugging.connect(_on_debugger_stop_signal_debugging)
 	add_debugger_plugin(debugger)
-	add_autoload_singleton("Signal_Debugger", "res://addons/SignalVisualizer/Debugger/SignalDebugger.gd")
+	
+	if not ProjectSettings.has_setting("autoload/Signal_Debugger"):
+		add_autoload_singleton("Signal_Debugger", "res://addons/SignalVisualizer/Debugger/SignalDebugger.gd")
 
 func _exit_tree():
 	remove_control_from_bottom_panel(dock)
