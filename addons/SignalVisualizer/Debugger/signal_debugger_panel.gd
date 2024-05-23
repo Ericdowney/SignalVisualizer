@@ -13,7 +13,7 @@ signal stop_signal_debugging
 @export var stop_icon: Texture2D
 
 @onready var action_button: Button = %ActionButton
-@onready var clear_button: Button = %ClearButton
+@onready var clear_all_button: Button = %ClearAllButton
 @onready var signal_tree: Tree = %SignalTree
 @onready var log_label: RichTextLabel = %LogLabel
 
@@ -46,9 +46,12 @@ func _on_action_button_pressed():
 	else:
 		start()
 
-func _on_clear_button_pressed():
+func _on_clear_all_button_pressed():
 	log_label.clear()
 	signal_tree.clear()
+
+func _on_clear_logs_button_pressed():
+	log_label.clear()
 
 func _on_signal_tree_item_selected():
 	# Updates the checkmark button
