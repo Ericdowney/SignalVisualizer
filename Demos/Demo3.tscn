@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtlyxmwytc8u6"]
+
+[ext_resource type="Script" path="res://Demos/Demo3.gd" id="1_2jtwt"]
+
+[node name="Demo3" type="Node2D"]
+script = ExtResource("1_2jtwt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

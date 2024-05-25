@@ -36,6 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TestButton" type="Button" parent="CanvasLayer/Demo1Hud"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 1
 anchors_preset = 1
@@ -50,6 +51,4 @@ text = "Test Button"
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="button_down" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_button_down"]
-[connection signal="button_up" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/Demo1Hud/TestButton" to="." method="_on_test_button_pressed"]

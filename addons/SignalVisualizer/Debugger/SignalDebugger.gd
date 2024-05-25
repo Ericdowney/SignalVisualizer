@@ -29,7 +29,7 @@ func _on_signal_debugger_message_capture(message: String, data: Array) -> bool:
 			_connect_to_signal(signal_item)
 		EngineDebugger.send_message(
 			"signal_debugger:generated_graph",
-			[_signal_graph.signals.map(func (item): return item.dictionary_representation)]
+			[[_signal_graph.signals.map(func (item): return item.dictionary_representation), _signal_graph.edges.map(func (item): return item.dictionary_representation)]]
 		)
 	if message == "stop" and _signal_graph:
 		for signal_item in _signal_graph.signals:
@@ -63,48 +63,60 @@ func _on_signal_execution(signal_name: String, node_name: String, args):
 # |===================================|
 # |===================================|
 
-func generate_signal_graph(is_persistent_only: bool = true) -> SignalGraph:
-	var signal_graph = SignalGraph.new()
-	var all_nodes: Array[Node] = _gather_nodes_in_scene()
-	var all_active_signals: Array[SignalDescription] = []
-	
-	signal_graph.name = get_tree().current_scene.name
-	
-	for node in all_nodes:
-		for signal_item in node.get_signal_list():
-			var connection_list = node.get_signal_connection_list(signal_item["name"] as String)
-			if connection_list.size() > 0:
-				var connections = []
-				for connection in connection_list:
-					var enabled_flags = connection["flags"] != CONNECT_ONE_SHOT if is_persistent_only else true
-					var should_display_connection = "name" in connection["callable"].get_object() and not connection["callable"].get_object().name.begins_with("@")# and enabled_flags
-					if should_display_connection:
-						var new_signal_description = SignalDescription.new()
-						new_signal_description.node_name = node.name
-						new_signal_description.signal_name = connection["signal"].get_name()
-						signal_graph.signals.append(new_signal_description)
-						
-						var new_edge = SignalConnection.new()
-						new_edge.signal_id = new_signal_description.id
-						new_edge.source_node_name = new_signal_description.node_name
-						new_edge.destination_node_name = connection["callable"].get_object().name
-						new_edge.method_signature = connection["callable"].get_method()
-						signal_graph.edges.append(new_edge)
-	
-	return signal_graph
+func generate_signal_graph() -> SignalGraph:
+	var graph = SignalGraphUtility.create_signal_graph_from_node(get_tree().current_scene)
+	return graph
+	#var signal_graph = SignalGraph.new(get_tree().current_scene.name)
+	#var all_nodes: Array[Node] = _gather_nodes_in_scene()
+	#var signals: Array[SignalDescription] = []
+	#var edges: Array[SignalConnection] = []
+	#
+	#for node in all_nodes:
+		#for signal_item in node.get_signal_list():
+			#var existing_signals = []
+			#var connection_list = node.get_signal_connection_list(signal_item["name"] as String)
+			#if connection_list.size() > 0:
+				#for connection in connection_list:
+					#var should_display_connection = "name" in connection["callable"].get_object() and not connection["callable"].get_object().name.begins_with("@")
+					#if should_display_connection:
+						#var signal_description: SignalDescription
+						#var filtered_signals = existing_signals.filter(func (element): return element.signal_name == signal_item.name and element.node_name == node.name)
+						#if filtered_signals.size() == 1:
+							#signal_description = filtered_signals[0]
+						#else:
+							#signal_description = SignalDescription.new(node.name, signal_item.name)
+							#existing_signals.append(signal_description)
+							#signals.append(signal_description)
+						#
+						#var signal_edge = SignalConnection.new(signal_description.id, signal_description.node_name, connection["callable"].get_object().name, connection["callable"].get_method())
+						#if not signal_graph.edges.any(func (element): return element.signal_id == signal_description.id):
+							#edges.append(signal_edge)
+	#
+	#var temp_signals = {}
+	#for item in signals:
+		#temp_signals[item.id] = item
+	#
+	#var temp_edges = {}
+	#for item in edges:
+		#temp_edges[item.dictionary_key] = item
+	#
+	#signal_graph.signals.assign(temp_signals.keys().map(func (key): return temp_signals[key]))
+	#signal_graph.edges.assign(temp_edges.keys().map(func (key): return temp_edges[key]))
+	#
+	#return signal_graph
 
-func _gather_nodes_in_scene() -> Array[Node]:
-	var scene_root = get_tree().current_scene
-	var node_list: Array[Node] = [scene_root]
-	return node_list + _gather_nodes_from_node(scene_root)
-
-func _gather_nodes_from_node(node: Node) -> Array[Node]:
-	var nodes: Array[Node] = []
-	for child in node.get_children(false):
-		nodes.append(child)
-		nodes += _gather_nodes_from_node(child)
-	
-	return nodes
+#func _gather_nodes_in_scene() -> Array[Node]:
+	#var scene_root = get_tree().current_scene
+	#var node_list: Array[Node] = [scene_root]
+	#return node_list + _gather_nodes_from_node(scene_root)
+#
+#func _gather_nodes_from_node(node: Node) -> Array[Node]:
+	#var nodes: Array[Node] = []
+	#for child in node.get_children(false):
+		#nodes.append(child)
+		#nodes += _gather_nodes_from_node(child)
+	#
+	#return nodes
 
 func _connect_to_signal(signal_item: SignalDescription):
 	var root_node = get_tree().current_scene

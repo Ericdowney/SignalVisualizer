@@ -1,8 +1,22 @@
 @tool
 class_name SignalDebuggerPanel extends Control
 
+signal open_script(node_name: String, method_signature: String)
+
 signal start_signal_debugging
 signal stop_signal_debugging
+
+var SignalGraphNode = preload("res://addons/SignalVisualizer/Visualizer/signal_graph_node.tscn")
+var GraphNodeItem = preload("res://addons/SignalVisualizer/Visualizer/signal_graph_node_item.tscn")
+
+const SOURCE_COLOR: Color = Color.SKY_BLUE
+const DESTINATION_COLOR: Color = Color.CORAL
+const CONNECTION_TYPE: int = 0
+
+enum Tabs {
+	LOG,
+	GRAPH
+}
 
 # Properties
 # |===================================|
@@ -16,6 +30,7 @@ signal stop_signal_debugging
 @onready var clear_all_button: Button = %ClearAllButton
 @onready var signal_tree: Tree = %SignalTree
 @onready var log_label: RichTextLabel = %LogLabel
+@onready var graph_node: GraphEdit = %Graph
 
 var is_started: bool = false :
 	get: return is_started
@@ -26,6 +41,8 @@ var is_started: bool = false :
 var _signals: Array = []
 var _signal_filter: Array = []
 var _is_stack_trace_enabled: bool = false
+var _debugger_tab_state: Tabs = Tabs.LOG
+var _graph: SignalGraph
 
 # Lifecycle
 # |===================================|
@@ -34,6 +51,7 @@ var _is_stack_trace_enabled: bool = false
 
 func _ready():
 	disable()
+	_handle_tab_update(0)
 
 # Signals
 # |===================================|
@@ -49,6 +67,10 @@ func _on_action_button_pressed():
 func _on_clear_all_button_pressed():
 	log_label.clear()
 	signal_tree.clear()
+	graph_node.clear_connections()
+	for child in graph_node.get_children():
+		if child is SignalGraphNode:
+			child.queue_free()
 
 func _on_clear_logs_button_pressed():
 	log_label.clear()
@@ -67,8 +89,14 @@ func _on_signal_tree_item_selected():
 	else:
 		_signal_filter.append(selected_signal.signal_name)
 
+func _on_tab_bar_tab_changed(tab: int):
+	_handle_tab_update(tab)
+
 func _on_stack_trace_button_pressed():
 	_is_stack_trace_enabled = not _is_stack_trace_enabled
+
+func _on_open_signal_in_script(data: SignalGraphNodeItem.Metadata):
+	open_script.emit(data.node_name, data.method_signature)
 
 # Methods
 # |===================================|
@@ -125,6 +153,10 @@ func create_tree_from_signals(signals: Array):
 		signal_tree_item.set_selectable(0, false)
 		signal_tree_item.set_selectable(1, true)
 
+func create_signal_graph(signals: Array, edges: Array):
+	_graph = SignalGraphUtility.create_signal_graph(get_tree().edited_scene_root.scene_file_path, signals, edges)
+	SignalGraphUtility.generate_signal_graph_nodes(_graph, graph_node, _on_open_signal_in_script)
+
 func log_signal_execution(time: String, node_name: String, signal_name: String):
 	if _signal_filter != null and _signal_filter.has(signal_name):
 		return
@@ -135,6 +167,21 @@ func log_signal_execution(time: String, node_name: String, signal_name: String):
 		"[color=#FFCC00]{time}[/color]\t\t{node_name}\t\t{signal_name}".format({ "time": time, "node_name": node_name, "signal_name": signal_name })
 	)
 	log_label.newline()
+
+func _handle_tab_update(selected_tab_index: int):
+	match selected_tab_index:
+		1:
+			_debugger_tab_state = Tabs.GRAPH
+		_:
+			_debugger_tab_state = Tabs.LOG
+	
+	match _debugger_tab_state:
+		Tabs.LOG:
+			log_label.show()
+			graph_node.hide()
+		Tabs.GRAPH:
+			log_label.hide()
+			graph_node.show()
 
 func _update_action_button():
 	if is_started:

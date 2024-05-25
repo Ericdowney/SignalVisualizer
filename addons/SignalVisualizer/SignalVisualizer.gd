@@ -4,6 +4,7 @@ extends EditorPlugin
 class SignalDebuggerPlugin extends EditorDebuggerPlugin:
 	var SignalDebuggerPanelScene = preload("res://addons/SignalVisualizer/Debugger/SignalDebugger.tscn")
 	
+	signal open_script
 	signal start_signal_debugging
 	signal stop_signal_debugging
 	
@@ -23,8 +24,10 @@ class SignalDebuggerPlugin extends EditorDebuggerPlugin:
 		
 		if message == "signal_debugger:generated_graph":
 			if data.size() == 1:
-				var signals = data[0] as Array
+				var signals = data[0][0] as Array
+				var edges = data[0][1] as Array
 				debugger_panel.create_tree_from_signals(signals)
+				debugger_panel.create_signal_graph(signals, edges)
 				return true
 		
 		return false
@@ -34,6 +37,7 @@ class SignalDebuggerPlugin extends EditorDebuggerPlugin:
 		var session = get_session(session_id)
 		
 		debugger_panel.name = "Signal Debugger"
+		debugger_panel.open_script.connect(func (arg1, arg2): open_script.emit(arg1, arg2))
 		debugger_panel.start_signal_debugging.connect(func (): start_signal_debugging.emit())
 		debugger_panel.stop_signal_debugging.connect(func (): stop_signal_debugging.emit())
 		
@@ -78,6 +82,7 @@ func _enter_tree():
 	
 	debugger.start_signal_debugging.connect(_on_debugger_start_signal_debugging)
 	debugger.stop_signal_debugging.connect(_on_debugger_stop_signal_debugging)
+	debugger.open_script.connect(_on_open_signal_in_script)
 	add_debugger_plugin(debugger)
 	
 	if not ProjectSettings.has_setting("autoload/Signal_Debugger"):
@@ -102,12 +107,15 @@ func _on_open_signal_in_script(node_name: String, method_signature: String):
 	else:
 		node = get_tree().edited_scene_root.find_child(node_name)
 	
-	var script: Script = node.get_script()
-	var editor = get_editor_interface()
-	var method_reference = _find_method_reference_in_script(script, method_signature)
-	
-	editor.edit_script(method_reference.script_reference, method_reference.line_number, 0)
-	editor.set_main_screen_editor("Script")
+	if node != null:
+		var script: Script = node.get_script()
+		var editor = get_editor_interface()
+		var method_reference = _find_method_reference_in_script(script, method_signature)
+		
+		editor.edit_script(method_reference.script_reference, method_reference.line_number, 0)
+		editor.set_main_screen_editor("Script")
+	else:
+		push_warning("Requested script for node ({name}) is not available.".format({ "name": node_name }))
 
 func _on_debugger_start_signal_debugging():
 	for session in debugger.get_sessions():

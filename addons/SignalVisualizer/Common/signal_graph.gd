@@ -16,12 +16,23 @@ var description: String :
 			"edges": edges.map(func (item): return item.description),
 		})
 
+var dictionary_representation: Dictionary :
+	get:
+		return {
+			"name": name,
+			"signals": signals.map(func (element): return element.dictionary_representation),
+			"edges": edges.map(func (element): return element.dictionary_representation),
+		}
+
 # Lifecycle
 # |===================================|
 # |===================================|
 # |===================================|
 
-
+func _init(name: String, signals: Array[SignalDescription] = [], edges: Array[SignalConnection] = []):
+	self.name = name
+	self.signals = signals
+	self.edges = edges
 
 # Signals
 # |===================================|
