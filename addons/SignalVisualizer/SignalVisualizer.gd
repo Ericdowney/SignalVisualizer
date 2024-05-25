@@ -109,11 +109,17 @@ func _on_open_signal_in_script(node_name: String, method_signature: String):
 	
 	if node != null:
 		var script: Script = node.get_script()
-		var editor = get_editor_interface()
-		var method_reference = _find_method_reference_in_script(script, method_signature)
-		
-		editor.edit_script(method_reference.script_reference, method_reference.line_number, 0)
-		editor.set_main_screen_editor("Script")
+		if script != null:
+			var editor = get_editor_interface()
+			var method_reference = _find_method_reference_in_script(script, method_signature)
+			
+			if method_reference != null:
+				editor.edit_script(method_reference.script_reference, method_reference.line_number, 0)
+				editor.set_main_screen_editor("Script")
+			else:
+				push_warning("Requested method in script ({script}) for node ({name}) is not available.".format({ "name": node_name, "script": script.name }))
+		else:
+			push_warning("Requested script for node ({name}) is not available.".format({ "name": node_name }))
 	else:
 		push_warning("Requested script for node ({name}) is not available.".format({ "name": node_name }))
 
