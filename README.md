@@ -1,5 +1,22 @@
-# SignalVisualizer
+<p align="center">
+    <img width=”400" src="./images/SignalVisualizerBanner.png" alt=Signal Visualizer Plugin Banner” />
+</p>
+
+<center>
+
+[![Static Badge](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)
+](https://www.youtube.com/@minigamedev)
+[![Static Badge](https://img.shields.io/badge/Godot%20Asset%20Library-blue?style=for-the-badge)
+](https://godotengine.org/asset-library/asset/2067)
+![Mastodon Follow](https://img.shields.io/mastodon/follow/110860230443653069?domain=https%3A%2F%2Fmastodon.gamedev.place&style=for-the-badge)
+[![Static Badge](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+](https://github.com/Ericdowney/SignalVisualizer/blob/main/LICENSE)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C0T61WG)
+
 A plugin for Godot 4.x. SignalVisualizer displays the current scene's signals and connections in a easy to read graph and tree dock.
+
+</center>
 
 ![Signal Visualizer plugin running Godot 4.x](./images/SignalVisualizerDemo.png)
 
@@ -105,6 +122,12 @@ With your game scene running, navigate to the Signal Debugger panel under the De
 Clicking `Stop` will stop signal debugging, disconnecting from all relavant signals in the current game scene. Closing the current game scene will disconnect and stop debugging as well.
 
 </details>
+
+## Love SignalVisualizer?
+
+If you like this plugin, please consider donating. 😁
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C0T61WG)
 
 ## Troubleshooting
 
