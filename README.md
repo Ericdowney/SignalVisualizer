@@ -8,7 +8,7 @@
 ](https://www.youtube.com/@minigamedev)
 [![Static Badge](https://img.shields.io/badge/Godot%20Asset%20Library-blue?style=for-the-badge)
 ](https://godotengine.org/asset-library/asset/2067)
-![Mastodon Follow](https://img.shields.io/mastodon/follow/110860230443653069?domain=https%3A%2F%2Fmastodon.gamedev.place&style=for-the-badge)
+[![Mastodon Follow](https://img.shields.io/mastodon/follow/110860230443653069?domain=https%3A%2F%2Fmastodon.gamedev.place&style=for-the-badge)](https://mastodon.gamedev.place/@minigamedev)
 [![Static Badge](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 ](https://github.com/Ericdowney/SignalVisualizer/blob/main/LICENSE)
 
