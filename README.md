@@ -1,5 +1,5 @@
 <p align="center">
-    <img width=”400" src="./images/SignalVisualizerBanner.png" alt=Signal Visualizer Plugin Banner” />
+    <img width="400" src="./images/SignalVisualizerBanner.png" alt="Signal Visualizer Plugin Banner" />
 </p>
 
 <center>
@@ -14,7 +14,7 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C0T61WG)
 
-A plugin for Godot 4.x. SignalVisualizer displays the current scene's signals and connections in a easy to read graph and tree dock.
+A plugin for Godot 4.x. SignalVisualizer displays the current scene and autoload signal connections in an easy to read graph and tree dock.
 
 </center>
 
@@ -37,7 +37,7 @@ The SignalVisualizer plugin can be installed from source or the Godot Asset Libr
 
 [Godot Asset Library: SignalVisualizer](https://godotengine.org/asset-library/asset/2067)
 
-### Installation via Github
+### Installation via GitHub
 
 1. Download the repo
 2. Copy the `addons/SignalVisualizer` directory to your project's `res://addons/` directory.
@@ -58,7 +58,7 @@ The SignalVisualizer plugin can be installed from source or the Godot Asset Libr
 <details>
 <summary><h3>Signal Visualizer</h3></summary>
 
-Signal Visualizer will create a signal graph by mapping the signals in the current scene in the Godot editor. The bottom dock uses the built-in `GraphEdit` and `Tree` nodes to display the signal graph. Only signals with the flag of `CONNECT_PERSIST` will be displayed in the signal graph. In addition, all nodes that begin with `@` in the name will be ignored.
+Signal Visualizer will create a signal graph by mapping the persisted signal connections in the current scene and project autoloads in the Godot editor. The bottom dock uses the built-in `GraphEdit` and `Tree` nodes to display the signal graph. Only signals with the flag of `CONNECT_PERSIST` will be displayed in the signal graph. In addition, all nodes that begin with `@` in the name will be ignored.
 
 1. With your scene open in the editor, open the bottom dock.
 2. In Signal Visualizer's top toolbar, click "Generate Graph"
@@ -68,10 +68,6 @@ Signal Visualizer will create a signal graph by mapping the signals in the curre
 #### Arrange Nodes Toggle
 
 The "Arrange Nodes" toggle enables and disables automatic node arrangement when generating the graph. When enabled, `GraphEdit`'s `arrange_nodes()` function will be called once all graph nodes are generated.
-
-#### Signal Details Toggle
-
-The "Signal Details" toggle enables and disables expanded formatting described below. When disabled, only the signal's name and corresponding function will be displayed in the graph nodes connections.
 
 #### Opening Signals in Source
 
@@ -101,9 +97,9 @@ Signal::Callable Method
 <details>
 <summary><h3>Signal Debugger</h3></summary>
 
-The Signal Debugger connects to a running scene instance to allow for automatic logging of signals. This alleviates the need to add `print` statements to your own code when debugging signals.
+The Signal Debugger connects to a running scene instance to allow for automatic logging of live signal executions. This includes signals connected through code at runtime and alleviates the need to add `print` statements to your own code when debugging signals.
 
-The Signal Debugger panel has two main components. The first is the signal tree. Similar to Signal Visualizer, all relevant scene signals are displayed in the tree.
+The Signal Debugger panel has two main components. The first is the signal tree. Similar to Signal Visualizer, all relevant scene and autoload signals are displayed in the tree.
 
 ![Signal Debugger Signal Tree Pane](./images/SignalDebuggerSignalTreeScreenshot.png)
 
@@ -111,7 +107,7 @@ The second main component is the signal log output. This is the main body of the
 
 ![Signal Debugger Signal Log Output Pane](./images/SignalDebuggerSignalLogScreenshot.png)
 
-With your game scene running, navigate to the Signal Debugger panel under the Debugger dock item. Click the `Start` button to begin signal logging. With the Signal Debugger started, the scene's signal tree will appear and a started message will appear in the signal log output. All relavant signals will log the following:
+With your game scene running, navigate to the Signal Debugger panel under the Debugger dock item. Click the `Start` button to begin signal logging. With the Signal Debugger started, the scene's signal tree will appear and a started message will appear in the signal log output. All relevant signals will log the following:
 
 * Timestamp
 * Node that fired the signal
@@ -119,7 +115,7 @@ With your game scene running, navigate to the Signal Debugger panel under the De
 
 ![Signal Debugger Panel with Data](./images/SignalDebuggerDataScreenshot.png)
 
-Clicking `Stop` will stop signal debugging, disconnecting from all relavant signals in the current game scene. Closing the current game scene will disconnect and stop debugging as well.
+Clicking `Stop` will stop signal debugging, disconnecting from all relevant signals in the current game scene. Closing the current game scene will disconnect and stop debugging as well.
 
 </details>
 

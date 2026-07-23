@@ -1,5 +1,5 @@
 @tool
-class_name SignalGraphNode extends GraphNode
+class_name SVSignalGraphNode extends GraphNode
 
 # Properties
 # |===================================|

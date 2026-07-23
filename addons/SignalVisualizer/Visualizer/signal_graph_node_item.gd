@@ -1,7 +1,7 @@
 @tool
-class_name SignalGraphNodeItem extends Control
+class_name SVSignalGraphNodeItem extends Control
 
-signal open_script(metadata: SignalGraphNodeItem.Metadata)
+signal open_script(metadata: SVSignalGraphNodeItem.Metadata)
 
 class Metadata:
 	var signal_name: String
